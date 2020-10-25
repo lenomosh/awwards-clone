@@ -6,7 +6,7 @@ import math
 
 # Create your models here.
 class Project(models.Model):
-    image_path = models.CharField(max_length=200)
+    url = models.URLField()
     description = models.TextField()
     title = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -33,6 +33,7 @@ class Rating(models.Model):
     usability, design, content = models.IntegerField(), models.IntegerField(), models.IntegerField()
     CREATED_AT = models.DateTimeField(auto_now_add=True)
     UPDATED_AT = models.DateTimeField(auto_now=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     def __str__(self):
-        return math.fsum([self.usability, self.design, self.content])
+        return math.fsum([self.usability, self.design, self.content])/3
