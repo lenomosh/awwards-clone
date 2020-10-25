@@ -21,7 +21,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'reset_migrations',
+    'rest_framework',
     'cloudinary',
     'api.apps.ApiConfig',
     'app_user.apps.AppUserConfig',
