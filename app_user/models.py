@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from cloudinary.models import CloudinaryField
 import math
 
 
@@ -9,7 +10,9 @@ class Project(models.Model):
     description = models.TextField()
     title = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    url = models.URLField()
+    image = CloudinaryField("image")
+    CREATED_AT = models.DateTimeField(auto_now_add=True)
+    UPDATED_AT = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -17,8 +20,10 @@ class Project(models.Model):
 
 class Profile(models.Model):
     bio = models.CharField(max_length=255)
-    profile_picture = models.CharField(max_length=255)
+    profile_picture = CloudinaryField("image")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    CREATED_AT = models.DateTimeField(auto_now_add=True)
+    UPDATED_AT = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.first_name
@@ -26,6 +31,8 @@ class Profile(models.Model):
 
 class Rating(models.Model):
     usability, design, content = models.IntegerField(), models.IntegerField(), models.IntegerField()
+    CREATED_AT = models.DateTimeField(auto_now_add=True)
+    UPDATED_AT = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return math.fsum([self.usability, self.design, self.content])
