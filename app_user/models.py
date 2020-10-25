@@ -14,6 +14,9 @@ class Project(models.Model):
     CREATED_AT = models.DateTimeField(auto_now_add=True)
     UPDATED_AT = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['UPDATED_AT']
+
     def __str__(self):
         return self.title
 
@@ -25,6 +28,9 @@ class Profile(models.Model):
     CREATED_AT = models.DateTimeField(auto_now_add=True)
     UPDATED_AT = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['UPDATED_AT']
+
     def __str__(self):
         return self.user.first_name
 
@@ -34,6 +40,9 @@ class Rating(models.Model):
     CREATED_AT = models.DateTimeField(auto_now_add=True)
     UPDATED_AT = models.DateTimeField(auto_now=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['UPDATED_AT']
 
     def __str__(self):
         return math.fsum([self.usability, self.design, self.content])/3
