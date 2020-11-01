@@ -14,8 +14,8 @@ def welcome(request):
 class PostListView(ListView):
     model = Post
     template_name = 'pages/home.html'
-    context_object_name = 'posts'
     ordering = ['-date_posted']
+    context_object_name = 'posts'
 
 
 class PostDetailView(DetailView):
